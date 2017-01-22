@@ -4,12 +4,6 @@ OpenFramewoks backend for the [TidalCycles](https://tidalcycles.org/) language
 for live coding patterns.
 
 
-## Current status
-
-Very experimental, contributions are welcome.
-
-
-
 ## Example
 
 ```C++
@@ -29,3 +23,24 @@ void ofApp::update(){
 }
 
 ```
+
+
+## Use as proxy
+
+The setup method take some optional parameters:
+
+```C++
+void setup(int inPort=57120, int outPort=57121, string outHost="127.0.0.1");
+```
+
+In Supercollider:
+
+```supercollider
+include("SuperDirt")
+SuperDirt.start(port: 57121)
+```
+
+
+## Current status
+
+Very experimental, contributions are welcome.

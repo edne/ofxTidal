@@ -4,7 +4,7 @@
 
 class ofxTidal {
 	public:
-		void setup(int inHost=57120, int outPort=57121,
+		void setup(int inPort=57120, int outPort=57121,
 		           string outHost="127.0.0.1");
 		void update();
 		void addCallback(string synth, function<void(void)> cb);
