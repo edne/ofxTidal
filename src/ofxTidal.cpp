@@ -45,9 +45,9 @@ string getFieldString(ofxOscMessage m, string fieldName){
 unordered_map<string, function<void(void)>> ofxTidal::callbacks;
 
 //--------------------------------------------------------------
-void ofxTidal::setup(){
-    // TODO: int portIn, int portOut, bool proxy=false
-	oscReceiver.setup(PORT);
+void ofxTidal::setup(int inPort, int outPort, string outHost){
+	oscReceiver.setup(inPort);
+	oscSender.setup(outHost, outPort);
 }
 
 //--------------------------------------------------------------
@@ -57,6 +57,7 @@ void ofxTidal::update(){
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(m);
+		oscSender.sendMessage(m, false);
 
 		if(validateMessage(m)){
 			string synth = getFieldString(m, "s");
