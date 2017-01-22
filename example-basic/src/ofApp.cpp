@@ -3,6 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	tidalProxy.setup();
+
+	tidalProxy.addCallback("bd", [](){
+		ofBackground(0, 0, 0);
+	});
+	tidalProxy.addCallback("sn", [](){
+		ofBackground(255, 255, 255);
+	});
 }
 
 //--------------------------------------------------------------

@@ -42,26 +42,37 @@ string getFieldString(ofxOscMessage m, string fieldName){
 	return "";
 }
 
+unordered_map<string, function<void(void)>> ofxTidal::callbacks;
+
 //--------------------------------------------------------------
 void ofxTidal::setup(){
     // TODO: int portIn, int portOut, bool proxy=false
-	receiver.setup(PORT);
+	oscReceiver.setup(PORT);
 }
 
 //--------------------------------------------------------------
 void ofxTidal::update(){
 	// check for waiting messages
-	while(receiver.hasWaitingMessages()){
+	while(oscReceiver.hasWaitingMessages()){
 		// get the next message
 		ofxOscMessage m;
-		receiver.getNextMessage(m);
-        // log called synth
+		oscReceiver.getNextMessage(m);
+
 		if(validateMessage(m)){
-			ofLog() << "synth: " << getFieldString(m, "s");
+			string synth = getFieldString(m, "s");
+			if(callbacks.find(synth) != callbacks.end()){
+				// TODO: arguments
+				callbacks[synth]();
+			}
 		}else{
 			ofLog() << "Invalid message:";
 			logMessage(m);
+			// TODO: throw exception, maybe
 		}
 	}
 }
 
+//--------------------------------------------------------------
+void ofxTidal::addCallback(string synth, function<void(void)> cb){
+	callbacks[synth] = cb;
+}

@@ -8,7 +8,9 @@ class ofxTidal {
 	public:
 		void setup();
 		void update();
+		void addCallback(string synth, function<void(void)> cb);
 
 	private:
-		ofxOscReceiver receiver;
+		ofxOscReceiver oscReceiver;
+		static unordered_map<string, function<void(void)>> callbacks;
 };
