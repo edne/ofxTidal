@@ -4,10 +4,11 @@
 void ofApp::setup(){
 	tidalProxy.setup();
 
-	tidalProxy.addCallback("bd", [](){
+	tidalProxy.addCallback("bd", [](int n){
 		ofBackground(0, 0, 0);
 	});
-	tidalProxy.addCallback("sn", [](){
+
+	tidalProxy.addCallback("sn", [](int n){
 		ofBackground(255, 255, 255);
 	});
 }
